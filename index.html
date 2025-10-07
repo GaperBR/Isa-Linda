@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isa Linda ❤️‍🔥</title>
+    <link rel="icon" href="https://em-content.zobj.net/source/microsoft-teams/363/sparkles_2728.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: #0f0c29;
+            background: linear-gradient(to right, #24243e, #302b63, #0f0c29);
+            color: white;
+        }
+
+        .stars {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Pétalas de rosa caindo */
+        .rose-petals {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .petal {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0;
+            animation: fallPetal 8s ease-in infinite;
+        }
+
+        @keyframes fallPetal {
+            0% {
+                transform: translateY(-10vh) rotateZ(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(110vh) rotateZ(720deg);
+                opacity: 0;
+            }
+        }
+
+        .floating-hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 25px;
+            opacity: 0;
+            animation: floatHeart 6s ease-in infinite;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-20vh) rotate(360deg) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .screen {
+            display: none;
+            width: 100%;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        /* Animações de transição mais elaboradas */
+        .screen.fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .screen.slide-in {
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        .screen.zoom-in {
+            animation: zoomIn 0.8s ease-out;
+        }
+
+        .screen.rotate-in {
+            animation: rotateIn 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5) rotate(-10deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        @keyframes rotateIn {
+            from {
+                opacity: 0;
+                transform: rotate(-180deg) scale(0.5);
+            }
+            to {
+                opacity: 1;
+                transform: rotate(0deg) scale(1);
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 40px 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #ff6b9d, #c06c84, #ffa07a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #ffa07a;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin: 15px 0;
+            color: #e0e0e0;
+        }
+
+        .emoji-big {
+            font-size: 80px;
+            margin: 20px 0;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 20px 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .button:active {
+            transform: translateY(-1px);
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .quiz-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .quiz-option:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #667eea;
+            transform: scale(1.05);
+        }
+
+        .quiz-option.correct {
+            background: rgba(76, 175, 80, 0.3);
+            border-color: #4caf50;
+            animation: pulse 0.5s;
+        }
+
+        .quiz-option.wrong {
+            background: rgba(244, 67, 54, 0.3);
+            border-color: #f44336;
+            animation: shake 0.5s;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .memory-game {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 25px 0;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .memory-card {
+            aspect-ratio: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .memory-card:hover {
+            transform: scale(1.05);
+        }
+
+        .memory-card.flipped {
+            background: rgba(102, 126, 234, 0.3);
+            border-color: #667eea;
+        }
+
+        .memory-card.matched {
+            background: rgba(76, 175, 80, 0.3);
+            border-color: #4caf50;
+            pointer-events: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin: 25px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .message-reveal {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+            border-left: 4px solid #ff6b9d;
+        }
+
+        .countdown {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 20px 0;
+            background: linear-gradient(45deg, #667eea, #764ba2, #ff6b9d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Contador de dias */
+        .days-counter {
+            background: rgba(255, 107, 157, 0.2);
+            border: 2px solid #ff6b9d;
+            border-radius: 20px;
+            padding: 25px;
+            margin: 25px 0;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 157, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(255, 107, 157, 0.8); }
+        }
+
+        .days-number {
+            font-size: 64px;
+            font-weight: bold;
+            color: #ff6b9d;
+            margin: 10px 0;
+            text-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
+        }
+
+        .fireworks {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .firework {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            animation: explode 1s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--x), var(--y));
+                opacity: 0;
+            }
+        }
+
+        .typewriter {
+            overflow: hidden;
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 3s steps(40, end);
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            font-size: 16px;
+            margin: 15px 0;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .hint {
+            font-size: 14px;
+            color: #ffa07a;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        #musicToggle:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes pulse-button {
+            0%, 100% { 
+                transform: scale(1); 
+                box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            }
+            50% { 
+                transform: scale(1.1); 
+                box-shadow: 0 8px 25px rgba(102, 126, 234, 0.8);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Controle de música -->
+    <div style="position: fixed; top: 20px; right: 20px; z-index: 9999;">
+        <button id="musicToggle" onclick="toggleMusic()" style="background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50%; width: 60px; height: 60px; font-size: 28px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            🔊
+        </button>
+    </div>
+
+    <!-- Player de música -->
+    <audio id="backgroundMusic" loop>
+        <source src="Something About You.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="stars" id="stars"></div>
+    <div class="rose-petals" id="rosePetals"></div>
+    <div class="floating-hearts" id="floatingHearts"></div>
+    <div class="fireworks" id="fireworks"></div>
+
+    <div class="container">
+        <!-- Tela 1: Introdução -->
+        <div class="screen active fade-in" id="screen1">
+            <div class="card">
+                <div class="emoji-big">💌</div>
+                <h1>Olá gatinha, vem sempre aqui?</h1>
+                <p>Preparei algo diferente para você be...</p>
+                <p>São várias etapas com surpresas pelo caminho! 🎁</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+                <button class="button" onclick="startJourney()">Começar a Jornada ✨</button>
+            </div>
+        </div>
+
+        <!-- Tela 2: Contador de Dias -->
+        <div class="screen" id="screen2">
+            <div class="card">
+                <div class="emoji-big">📅</div>
+                <h2>Nossa História</h2>
+                <p>Desde o dia que te mandei a primeira mensagem...</p>
+                <div class="days-counter">
+                    <p style="font-size: 20px; margin-bottom: 10px;">Já se passaram</p>
+                    <div class="days-number" id="daysCount">0</div>
+                    <p style="font-size: 20px; margin-top: 10px;">dias incríveis juntos! 💕</p>
+                </div>
+                <p>E cada dia é mais especial que o anterior...</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 16%"></div>
+                </div>
+                <button class="button" onclick="changeScreen(2, 3, 'slide-in')">Continuar 💫</button>
+            </div>
+        </div>
+
+        <!-- Tela 3: Quiz -->
+        <div class="screen" id="screen3">
+            <div class="card">
+                <div class="emoji-big">🤔</div>
+                <h2>Etapa 1: Você me conhece?</h2>
+                <p id="quizQuestion">Carregando...</p>
+                <div class="quiz-options" id="quizOptions"></div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 33%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela 4: Jogo da Memória -->
+        <div class="screen" id="screen4">
+            <div class="card">
+                <div class="emoji-big">🎮</div>
+                <h2>Etapa 2: Jogo da Memória</h2>
+                <p>Encontre todos os pares de corações!</p>
+                <div class="memory-game" id="memoryGame"></div>
+                <p id="memoryStatus">Pares encontrados: 0/4</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 50%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela 5: Código Secreto -->
+        <div class="screen" id="screen5">
+            <div class="card">
+                <div class="emoji-big">🔐</div>
+                <h2>Etapa 3: Código Secreto</h2>
+                <p>Digite a palavra mágica para continuar...</p>
+                <p class="hint">Dica: Ja te chamei disso algumas vezes e você sempre ri. (palavra de 8 letras) 💖</p>
+                <input type="text" id="secretCode" placeholder="Digite aqui...">
+                <button class="button" onclick="checkCode()">Verificar 🔍</button>
+                <p id="codeResult"></p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 75%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela 6: Contagem Regressiva -->
+        <div class="screen" id="screen6">
+            <div class="card">
+                <div class="emoji-big">⏰</div>
+                <h2>Preparando a Surpresa Final...</h2>
+                <div class="countdown" id="countdown">3</div>
+                <p>Aguarde um momento especial...</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 90%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela 7: Mensagem Final -->
+        <div class="screen" id="screen7">
+            <div class="card">
+                <div class="emoji-big">✨💖✨</div>
+                <h1 class="typewriter">Você é perfeita.</h1>
+                
+                <div class="message-reveal">
+                    <p><strong>Parabéns por completar todas as etapas! 🎉</strong></p>
+                    <br>
+                    <p>Queria te dizer que cada momento ao seu lado é especial para mim. Sinto saudades constantes de você, nossas noites dormidas, nossos bom dias depois de certos atos..</p>
+                    <br>
+                    <p>Criei isso pensando em você, para te mostrar de um jeito diferente o quanto gosto da sua companhia. Eu quero tentar te conquistar todos os dias.</p>
+                    <br>
+                    <p>Você é a luz que faltava nos meus dias mais sombrios!</p>
+                    <br>
+                    <p><em>Você é alguém muito especial na minha vida! 💕</em></p>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 100%"></div>
+                </div>
+
+                <button class="button" onclick="celebrateMore()">🎆 Comemorar! 🎆</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Controle de música
+        let musicPlaying = false;
+        let musicInitialized = false;
+        const music = document.getElementById('backgroundMusic');
+        const musicToggle = document.getElementById('musicToggle');
+
+        function toggleMusic() {
+            if (musicPlaying) {
+                music.pause();
+                musicToggle.textContent = '🔇';
+                musicPlaying = false;
+            } else {
+                playMusic();
+            }
+        }
+
+        function playMusic() {
+            if (!musicPlaying) {
+                music.play().then(() => {
+                    musicPlaying = true;
+                    musicInitialized = true;
+                    musicToggle.textContent = '🔊';
+                    musicToggle.style.animation = 'none';
+                }).catch(e => {
+                    console.log('Aguardando interação do usuário para tocar música');
+                    musicToggle.textContent = '🔇';
+                    musicToggle.style.animation = 'pulse-button 1s infinite';
+                });
+            }
+        }
+
+        // Configurar volume quando a página carregar
+        window.addEventListener('load', () => {
+            music.volume = 0.3; // Volume a 30%
+        });
+
+        // Tentar tocar música no primeiro clique do usuário
+        document.addEventListener('click', function initMusic() {
+            if (!musicInitialized) {
+                playMusic();
+            }
+        }, { once: false });
+
+        // Tocar ao clicar no botão de começar
+        function startJourney() {
+            if (!musicInitialized) {
+                playMusic();
+            }
+            changeScreen(1, 2, 'zoom-in');
+            document.getElementById('daysCount').textContent = calculateDays();
+        }
+
+        // Criar estrelas no fundo
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Criar pétalas de rosa caindo
+        function createRosePetal() {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            const petals = ['🌸', '🌺', '🌹', '🥀', '💮'];
+            petal.textContent = petals[Math.floor(Math.random() * petals.length)];
+            petal.style.left = Math.random() * 100 + '%';
+            petal.style.animationDuration = (Math.random() * 4 + 6) + 's';
+            petal.style.animationDelay = Math.random() * 2 + 's';
+            document.getElementById('rosePetals').appendChild(petal);
+            
+            setTimeout(() => petal.remove(), 10000);
+        }
+
+        // Criar corações flutuantes
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            const hearts = ['💖', '💕', '💗', '💓', '💝'];
+            heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            document.getElementById('floatingHearts').appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 6000);
+        }
+
+        // Calcular dias desde 16 de agosto de 2025
+        function calculateDays() {
+            const startDate = new Date('2024-08-16');
+            const today = new Date();
+            const diffTime = Math.abs(today - startDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            return diffDays;
+        }
+
+        // Quiz
+        const quizData = {
+            question: "Qual dessas coisas você acha que eu mais gosto em você?",
+            options: [
+                { text: "Seu sorriso 😊", correct: false },
+                { text: "Seu jeito único de ser ✨", correct: true },
+                { text: "Seu senso de humor 😄", correct: false },
+                { text: "Tudo isso já citado e mais! 💖", correct: true }
+            ]
+        };
+
+        // Jogo da memória
+        let memoryCards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        const cardEmojis = ['💖', '💖', '⭐', '⭐', '🌙', '🌙', '✨', '✨'];
+
+        function startJourney() {
+            changeScreen(1, 2, 'zoom-in');
+            // Mostrar contador de dias
+            document.getElementById('daysCount').textContent = calculateDays();
+        }
+
+        function changeScreen(from, to, animation = 'fade-in') {
+            const fromScreen = document.getElementById('screen' + from);
+            const toScreen = document.getElementById('screen' + to);
+            
+            fromScreen.classList.remove('active');
+            
+            setTimeout(() => {
+                toScreen.classList.add('active', animation);
+                // Remover animação após completar
+                setTimeout(() => {
+                    toScreen.classList.remove('fade-in', 'slide-in', 'zoom-in', 'rotate-in');
+                }, 800);
+            }, 300);
+        }
+
+        function loadQuiz() {
+            document.getElementById('quizQuestion').textContent = quizData.question;
+            const optionsContainer = document.getElementById('quizOptions');
+            
+            quizData.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'quiz-option';
+                optionDiv.textContent = option.text;
+                optionDiv.onclick = () => selectQuizOption(index, option.correct);
+                optionsContainer.appendChild(optionDiv);
+            });
+        }
+
+        function selectQuizOption(index, correct) {
+            const options = document.querySelectorAll('.quiz-option');
+            options[index].classList.add(correct ? 'correct' : 'wrong');
+            
+            if (correct) {
+                setTimeout(() => {
+                    changeScreen(3, 4, 'rotate-in');
+                    initMemoryGame();
+                }, 1500);
+            }
+        }
+
+        function initMemoryGame() {
+            const gameContainer = document.getElementById('memoryGame');
+            gameContainer.innerHTML = '';
+            
+            const shuffled = cardEmojis.sort(() => Math.random() - 0.5);
+            
+            shuffled.forEach((emoji, index) => {
+                const card = document.createElement('div');
+                card.className = 'memory-card';
+                card.textContent = '?';
+                card.dataset.emoji = emoji;
+                card.dataset.index = index;
+                card.onclick = () => flipCard(card);
+                gameContainer.appendChild(card);
+            });
+        }
+
+        function flipCard(card) {
+            if (flippedCards.length >= 2 || card.classList.contains('flipped') || card.classList.contains('matched')) {
+                return;
+            }
+            
+            card.classList.add('flipped');
+            card.textContent = card.dataset.emoji;
+            flippedCards.push(card);
+            
+            if (flippedCards.length === 2) {
+                setTimeout(checkMatch, 800);
+            }
+        }
+
+        function checkMatch() {
+            const [card1, card2] = flippedCards;
+            
+            if (card1.dataset.emoji === card2.dataset.emoji) {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                matchedPairs++;
+                
+                document.getElementById('memoryStatus').textContent = `Pares encontrados: ${matchedPairs}/4`;
+                
+                if (matchedPairs === 4) {
+                    setTimeout(() => changeScreen(4, 5, 'slide-in'), 1000);
+                }
+            } else {
+                card1.classList.remove('flipped');
+                card2.classList.remove('flipped');
+                card1.textContent = '?';
+                card2.textContent = '?';
+            }
+            
+            flippedCards = [];
+        }
+
+        function checkCode() {
+            const code = document.getElementById('secretCode').value.toLowerCase().trim();
+            const result = document.getElementById('codeResult');
+            
+            if (code === 'babygirl') {
+                result.textContent = '✅ Correto! Você acertou!';
+                result.style.color = '#4caf50';
+                setTimeout(() => {
+                    changeScreen(5, 6, 'zoom-in');
+                    startCountdown();
+                }, 1500);
+            } else {
+                result.textContent = '❌ Tente novamente! Dica: Você ja me mandou uma figurinha por conta disso💭';
+                result.style.color = '#f44336';
+            }
+        }
+
+        function startCountdown() {
+            let count = 3;
+            const countdownEl = document.getElementById('countdown');
+            
+            const interval = setInterval(() => {
+                count--;
+                if (count > 0) {
+                    countdownEl.textContent = count;
+                } else {
+                    clearInterval(interval);
+                    changeScreen(6, 7, 'rotate-in');
+                    createFireworks();
+                }
+            }, 1000);
+        }
+
+        function createFireworks() {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    launchFirework();
+                }, i * 600);
+            }
+        }
+
+        function launchFirework() {
+            const colors = ['#ff6b9d', '#c06c84', '#ffa07a', '#667eea', '#764ba2'];
+            const x = Math.random() * window.innerWidth;
+            const y = Math.random() * window.innerHeight * 0.5;
+            
+            for (let i = 0; i < 30; i++) {
+                const firework = document.createElement('div');
+                firework.className = 'firework';
+                firework.style.left = x + 'px';
+                firework.style.top = y + 'px';
+                firework.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                const angle = (Math.PI * 2 * i) / 30;
+                const velocity = 100 + Math.random() * 100;
+                firework.style.setProperty('--x', Math.cos(angle) * velocity + 'px');
+                firework.style.setProperty('--y', Math.sin(angle) * velocity + 'px');
+                
+                document.getElementById('fireworks').appendChild(firework);
+                
+                setTimeout(() => firework.remove(), 1000);
+            }
+        }
+
+        function celebrateMore() {
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    launchFirework();
+                    createFloatingHeart();
+                    createRosePetal();
+                }, i * 300);
+            }
+        }
+
+        // Inicialização
+        createStars();
+        setInterval(createFloatingHeart, 800);
+        setInterval(createRosePetal, 600);
+        
+        // Carregar quiz quando necessário
+        setTimeout(() => {
+            loadQuiz();
+        }, 100);
+    </script>
+</body>
+</html>
